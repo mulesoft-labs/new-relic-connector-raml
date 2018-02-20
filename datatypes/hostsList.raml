@@ -9,67 +9,66 @@ properties:
       required: false
       type: object
       properties:
-        application_host:
+        id:
+          required: false
+          type: integer
+        application_name:
+          required: false
+          type: string
+        host:
+          required: false
+          type: string
+        language:
+          required: false
+          type: string
+        health_status:
+          required: false
+          type: string
+        application_summary:
           required: false
           type: object
           properties:
-            id:
+            response_time:
+              required: false
+              type: number
+            throughput:
+              required: false
+              type: number
+            error_rate:
+              required: false
+              type: number
+            apdex_score:
+              required: false
+              type: number
+            instance_count:
               required: false
               type: integer
-            application_name:
+        end_user_summary:
+          required: false
+          type: object
+          properties:
+            response_time:
               required: false
-              type: string
-            host:
+              type: number
+            throughput:
               required: false
-              type: string
-            language:
+              type: number
+            apdex_score:
+              required: false
+              type: number
+        links:
+          required: false
+          type: object
+          properties:
+            application:
               required: false
               type: integer
-            health_status:
+            application_instances:
               required: false
-              type: string
-            application_summaries:
+              type: array
+              items:
+                required: false
+                type: integer
+            server:
               required: false
-              type: object
-              properties:
-                response_time:
-                  required: false
-                  type: number
-                throughput:
-                  required: false
-                  type: number
-                error_rate:
-                  required: false
-                  type: number
-                apdex_score:
-                  required: false
-                  type: number
-            end_user_summaries:
-              required: false
-              type: object
-              properties:
-                response_time:
-                  required: false
-                  type: number
-                throughput:
-                  required: false
-                  type: number
-                apdex_score:
-                  required: false
-                  type: number
-            links:
-              required: false
-              type: object
-              properties:
-                application:
-                  required: false
-                  type: integer
-                application_instances:
-                  required: false
-                  type: array
-                  items:
-                    required: false
-                    type: integer
-                server:
-                  required: false
-                  type: integer
+              type: integer

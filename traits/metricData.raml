@@ -3,9 +3,10 @@ description: This API endpoint returns a list of values for each of the requeste
 queryParameters: 
   names[]: 
     description: Retrieve specific metrics by name
-    required: true
+    required: false
   values[]: 
     description: Retrieve specific metric values
+    required: false
   from: 
     description: Retrieve metrics after this time
   to: 
@@ -13,3 +14,7 @@ queryParameters:
   summarize: 
     description: Summarize the data
     type: boolean
+    required: false
+  raw:
+    type: boolean
+    required: false

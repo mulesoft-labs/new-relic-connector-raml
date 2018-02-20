@@ -3,8 +3,8 @@ required: false
 type: object
 properties:
   application_instance:
-    required: false
     type: object
+    required: true
     properties:
       id:
         required: false
@@ -20,11 +20,11 @@ properties:
         type: integer
       language:
         required: false
-        type: integer
+        type: string
       health_status:
         required: false
         type: string
-      application_summaries:
+      application_summary:
         required: false
         type: object
         properties:
@@ -40,7 +40,10 @@ properties:
           apdex_score:
             required: false
             type: number
-      end_user_summaries:
+          instance_count:
+            type: integer
+            required: false
+      end_user_summary:
         required: false
         type: object
         properties:
@@ -66,3 +69,6 @@ properties:
           server:
             required: false
             type: integer
+
+
+

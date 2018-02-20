@@ -1,8 +1,7 @@
 #%RAML 1.0
 title: NewRelic
 version: v2
-baseUri: https://mocksvc.stgx.mulesoft.com/mocks/eb15995d-b26c-4833-b5f1-c68d736355c4/{version} # baseUri: https://mocksvc.stgx.mulesoft.com/mocks/eb15995d-b26c-4833-b5f1-c68d736355c4/{version} 
-# baseUri: https://api.newrelic.com/{version}
+baseUri: https://api.newrelic.com/{version}
 securitySchemes: 
   x-Api-Key: !include securitySchemes/x-Api-Key.raml
 securedBy: x-Api-Key
@@ -17,6 +16,7 @@ types:
   hostsList: !include datatypes/hostsList.raml
   instance: !include datatypes/instance.raml
   instancesList: !include datatypes/instancesList.raml
+  metricDataPoint: !include datatypes/metricDatapoint.raml
   metricNames: !include datatypes/metricNames.raml
   notificationChannel: !include datatypes/notificationChannel.raml
   notificationChannelsList: !include datatypes/notificationChannelsList.raml
@@ -45,6 +45,7 @@ traits:
       enum: [ .json , .xml ]
   get: 
     is: [ filterableById: { name: application } , filterableByName: { name: application } ]
+    displayName: Get all applications
     description: |
       This API endpoint returns a paginated list of the Applications associated with your New Relic account.
       Applications can be filtered by their name, the list of application IDs or the application language as reported by the agents.
@@ -59,7 +60,7 @@ traits:
             type: applicationsList
             example: !include examples/applicationsList.raml
 /applications: 
-  /{id}{mediaTypeExtension}: 
+  /{id}{mediaTypeExtension}:
     type: { collectionMember: { name: application } }
     uriParameters: 
       id: 
@@ -67,7 +68,8 @@ traits:
         type: integer
       mediaTypeExtension: 
         enum: [ .json , .xml ]
-    get: 
+    get:
+      displayName: Get an application by Id
       description: |
         This API endpoint returns a single Application, identified its ID.
       responses: 
@@ -76,7 +78,8 @@ traits:
             application/json: 
               type: application
               example: !include examples/application.raml
-    put: 
+    put:
+      displayName: Update an application by Id
       description: |
         This API endpoint allows you to update certain parameters of your application.
         The input is expected to be in JSON or XML format in the body parameter of the PUT request. The exact schema is defined below. Any extra parameters passed in the body will be ignored.
@@ -91,6 +94,7 @@ traits:
               type: application
               example: !include examples/application.raml
     delete: 
+      displayName: Delete an application by Id
       description: |
         This API endpoint deletes an application and all of its reported data.
         **WARNING**: Only applications that have stopped reporting can be deleted. This is an irreversible process which will delete all reported data for this application.
@@ -111,20 +115,35 @@ traits:
         mediaTypeExtension: 
           enum: [ .json , .xml ]
       get: 
+        displayName: Get all metrics associated with a applicationId
         is: [ metricNames ]
+        responses: 
+          200: 
+            body: 
+              application/json: 
+                type: metricNames
+                example: !include examples/metricNames.raml
     /metrics: 
       /data{mediaTypeExtension}: 
         uriParameters: 
           mediaTypeExtension: 
             enum: [ .json , .xml ]
         get: 
+          displayName: Get all datapoints by metric by applicationId
           is: [ metricData ]
+          responses: 
+            200: 
+              body: 
+                application/json:
+                  type: metricDataPoint
+                  example: !include examples/metricDatapoint.raml
     /hosts{mediaTypeExtension}: 
       type: collection
       uriParameters: 
         mediaTypeExtension: 
           enum: [ .json , .xml ]
       get: 
+        displayName: Get all hosts by applicationId
         is: [ filterableById: { name: host } , filterableByHostname ]
         description: |
           This API endpoint returns a paginated list of hosts associated with the given application.
@@ -145,6 +164,7 @@ traits:
           mediaTypeExtension: 
             enum: [ .json , .xml ]
         get: 
+          displayName: Get a host by applicationId
           description: |
             This API endpoint returns a single application host, identified by its ID.
           responses: 
@@ -160,20 +180,39 @@ traits:
             mediaTypeExtension: 
               enum: [ .json , .xml ]
           get: 
+            displayName: Get all metrics associated with a given hostId and applicationId
             is: [ metricNames ]
+            description: |
+              This API endpoint returns all metrics associated with a single application host
+            responses:
+              200:
+                body:
+                  application/json: 
+                    type: metricNames
+                    example: !include examples/metricNames.raml
         /metrics: 
           /data{mediaTypeExtension}: 
             uriParameters: 
               mediaTypeExtension: 
                 enum: [ .json , .xml ]
             get: 
+              displayName: Get all datapoints associated with given metric host and applicationId
               is: [ metricData ]
+              description: |
+                This API endpoint returns all metric datapoints associated with a single application host and metric
+              responses: 
+                200: 
+                  body: 
+                    application/json:
+                      type: metricDataPoint
+                      example: !include examples/metricDatapoint.raml
     /instances{mediaTypeExtension}: 
       type: collection
       uriParameters: 
         mediaTypeExtension: 
           enum: [ .json , .xml ]
       get: 
+        displayName: Get all instances of an applicationId
         is: [ filterableById: { name: application instance } , filterableByHostname ]
         description: |
           This API endpoint returns a paginated list of instances associated with the given application.
@@ -194,6 +233,7 @@ traits:
           mediaTypeExtension: 
             enum: [ .json , .xml ]
         get: 
+          displayName: Get an instance of an applicationId
           description: |
             This API endpoint returns a single application instance, identified by its ID.
           responses: 
@@ -208,15 +248,29 @@ traits:
           uriParameters: 
             mediaTypeExtension: 
               enum: [ .json , .xml ]
-          get: 
+          get:
+            displayName: Get all metric within a given instance and applicationId
             is: [ metricNames ]
+            responses:
+              200:
+                body:
+                  application/json: 
+                    type: metricNames
+                    example: !include examples/metricNames.raml
         /metrics: 
           /data{mediaTypeExtension}: 
             uriParameters: 
               mediaTypeExtension: 
                 enum: [ .json , .xml ]
-            get: 
+            get:
+              displayName: Get all datapoints associated with a given metric instance and applicationId
               is: [ metricData ]
+              responses: 
+                200: 
+                  body: 
+                    application/json:
+                      type: metricDataPoint
+                      example: !include examples/metricDatapoint.raml
 /servers{mediaTypeExtension}: 
   type: collection
   uriParameters: 

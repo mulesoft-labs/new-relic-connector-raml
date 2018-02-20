@@ -1,22 +1,18 @@
 #%RAML 1.0 NamedExample
-value:
-  application_host:
-    id: 1
-    application_name: some string
-    host: some string
-    language: 1
-    health_status: some string
-    application_summaries:
-      response_time: 1
-      throughput: 1
-      error_rate: 1
-      apdex_score: 1
-    end_user_summaries:
-      response_time: 1
-      throughput: 1
-      apdex_score: 1
-    links:
-      application: 1
-      application_instances:
-      - 1
-      server: 1
+application_host:
+  id: 89809888
+  application_name: Authentication Server (production)
+  host: authentication-server-i-00b275e78ba0b12ff
+  language: nodejs
+  health_status: green
+  application_summary:
+    response_time: 29.4
+    throughput: 1470
+    error_rate: 0
+    apdex_score: 0.9
+    instance_count: 1
+  links:
+    application: 89804076
+    application_instances:
+    - 89809889
+    server: 89809821

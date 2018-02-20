@@ -14,7 +14,7 @@ properties:
         type: string
       language:
         required: false
-        type: integer
+        type: string
       health_status:
         required: false
         type: string
@@ -24,7 +24,7 @@ properties:
       last_reported_at:
         required: false
         type: string
-      application_summaries:
+      application_summary:
         required: false
         type: object
         properties:
@@ -43,6 +43,15 @@ properties:
           apdex_score:
             required: false
             type: number
+          host_count: 
+            required: false
+            type: integer
+          instance_count:
+            required: false 
+            type: integer
+          concurrent_instance_count:
+            required: false 
+            type: integer
       end_user_summaries:
         required: false
         type: object
@@ -91,3 +100,12 @@ properties:
             items:
               required: false
               type: integer
+          application_instances:
+            required: false
+            type: array
+            items:
+              required: false
+              type: integer
+          alert_policy:
+            required: false
+            type: integer

@@ -1,1 +1,1 @@
-{"main":"new-relic.raml","name":"New Relic","classifier":"raml","tags":[],"groupId":"88e95505-8f4a-473f-a8d9-a0a7296511ab","assetId":"new-relic","version":"2.2.8","apiVersion":"v2"}
+{"main":"newrelic.raml","name":"NewRelic","classifier":"raml","tags":[],"groupId":"e25a6a58-8049-4172-93fd-f15b7713ca86","assetId":"newrelic","version":"1.0.0","apiVersion":"v2"}

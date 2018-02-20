@@ -3,98 +3,111 @@ required: false
 type: object
 properties:
   applications:
-    required: false
     type: array
     items:
       required: false
       type: object
       properties:
-        application:
+        id:
+          required: false
+          type: integer
+        name:
+          required: false
+          type: string
+        language:
+          required: false
+          type: string
+        health_status:
+          required: false
+          type: string
+        reporting:
+          required: false
+          type: boolean
+        last_reported_at:
+          required: false
+          type: string
+        application_summary:
           required: false
           type: object
           properties:
-            id:
+            response_time:
+              required: false
+              type: number
+            throughput:
+              required: false
+              type: number
+            error_rate:
+              required: false
+              type: number
+            apdex_target:
+              required: false
+              type: number
+            apdex_score:
+              required: false
+              type: number
+            host_count: 
               required: false
               type: integer
-            name:
-              required: false
-              type: string
-            language:
-              required: false
+            instance_count:
+              required: false 
               type: integer
-            health_status:
+            concurrent_instance_count:
+              required: false 
+              type: integer
+        end_user_summaries:
+          required: false
+          type: object
+          properties:
+            response_time:
               required: false
-              type: string
-            reporting:
+              type: number
+            throughput:
+              required: false
+              type: number
+            apdex_target:
+              required: false
+              type: number
+            apdex_score:
+              required: false
+              type: number
+        settings:
+          required: false
+          type: object
+          properties:
+            app_apdex_threshold:
+              required: false
+              type: number
+            end_user_apdex_threshold:
+              required: false
+              type: number
+            enable_real_user_monitoring:
               required: false
               type: boolean
-            last_reported_at:
+            use_server_side_config:
               required: false
-              type: string
-            application_summaries:
+              type: boolean
+        links:
+          required: false
+          type: object
+          properties:
+            servers:
               required: false
-              type: object
-              properties:
-                response_time:
-                  required: false
-                  type: number
-                throughput:
-                  required: false
-                  type: number
-                error_rate:
-                  required: false
-                  type: number
-                apdex_target:
-                  required: false
-                  type: number
-                apdex_score:
-                  required: false
-                  type: number
-            end_user_summaries:
+              type: array
+              items:
+                required: false
+                type: integer
+            application_hosts:
               required: false
-              type: object
-              properties:
-                response_time:
-                  required: false
-                  type: number
-                throughput:
-                  required: false
-                  type: number
-                apdex_target:
-                  required: false
-                  type: number
-                apdex_score:
-                  required: false
-                  type: number
-            settings:
+              type: array
+              items:
+                required: false
+                type: integer
+            application_instances:
               required: false
-              type: object
-              properties:
-                app_apdex_threshold:
-                  required: false
-                  type: number
-                end_user_apdex_threshold:
-                  required: false
-                  type: number
-                enable_real_user_monitoring:
-                  required: false
-                  type: boolean
-                use_server_side_config:
-                  required: false
-                  type: boolean
-            links:
+              type: array
+              items:
+                required: false
+                type: integer
+            alert_policy:
               required: false
-              type: object
-              properties:
-                servers:
-                  required: false
-                  type: array
-                  items:
-                    required: false
-                    type: integer
-                application_hosts:
-                  required: false
-                  type: array
-                  items:
-                    required: false
-                    type: integer
+              type: integer

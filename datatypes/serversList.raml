@@ -9,20 +9,19 @@ properties:
       required: false
       type: object
       properties:
-        server:
-          required: false
-          type: object
-          properties:
             id:
               required: false
               type: integer
             account_id:
               required: false
               type: integer
-            display_name:
+            name:
               required: false
               type: string
             host:
+              required: false
+              type: string
+            health_status:
               required: false
               type: string
             reporting:
@@ -30,8 +29,15 @@ properties:
               type: boolean
             last_reported_at:
               required: false
-              type: string
-            summaries:
+              type: datetime
+            links:
+              required: false
+              type: object
+              properties:
+                alert_policy:
+                  required: false
+                  type: integer
+            summary:
               required: false
               type: object
               properties:
